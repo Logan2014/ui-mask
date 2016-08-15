@@ -557,8 +557,13 @@ angular.module('ui.mask', [])
                                         valAltered = false,
                                         valUnmasked = unmaskValue(val),
                                         valUnmaskedOld = oldValueUnmasked,
-                                        caretPos = getCaretPosition(this) || 0,
-                                        caretPosOld = oldCaretPosition || 0,
+                                        caretPos = getCaretPosition(this) || 0;
+										
+								if (val.indexOf(valOld) === 0) {
+                                    caretPos += val.length - valOld.length;
+                                }
+								
+                                var caretPosOld = oldCaretPosition || 0,
                                         caretPosDelta = caretPos - caretPosOld,
                                         caretPosMin = maskCaretMap[0],
                                         caretPosMax = maskCaretMap[valUnmasked.length] || maskCaretMap.slice().shift(),
